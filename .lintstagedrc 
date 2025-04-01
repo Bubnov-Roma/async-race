@@ -1,0 +1,10 @@
+{
+  "*.(css|scss)": [
+    "stylelint --fix",
+    "prettier --write"
+  ],
+  "*.{js,ts,jsx}": [
+    "eslint --fix",
+    "prettier --write"
+  ]
+}
