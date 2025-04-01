@@ -12,6 +12,19 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitAny": true,
+    // "strictClassInitialization": true,
+    // "strictLiteralTypes": true,
+    // "strictTemplateLiteralTypes": true,
+    // "strictTypeArguments": true,
+    "alwaysStrict": true,
+    "strictBuiltinIteratorReturn": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
 
     /* Linting */
     "strict": true,
@@ -20,5 +33,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["eslint.config.js", "src", "commitlint.config.ts"]
 }

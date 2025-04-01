@@ -1,9 +1,9 @@
-import globals from "globals";
 import eslint from "@eslint/js";
-import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
-import tsParser from "@typescript-eslint/parser";
 import tsEslintPlugin from "@typescript-eslint/eslint-plugin";
+import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import globals from "globals";
+import tsParser from "@typescript-eslint/parser";
 
 export default tseslint.config(
   { ignores: ["node_modules/"] },
