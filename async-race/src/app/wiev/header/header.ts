@@ -251,4 +251,4 @@ function handleEvent(event: Event): void {
 
 document?.addEventListener("click", handleEvent);
 
-await updateGarage();
+updateGarage();
