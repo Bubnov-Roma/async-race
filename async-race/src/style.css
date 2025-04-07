@@ -1,9 +1,14 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
   color: rgb(255 255 255 / 87%);
   text-rendering: optimizelegibility;
 
@@ -15,12 +20,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #bfbfbf;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #bfbfbf;
 }
 
 body {
@@ -84,7 +89,7 @@ button {
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #bfbfbf;
 }
 
 button:focus,
@@ -99,7 +104,7 @@ button:focus-visible {
   }
 
   a:hover {
-    color: #747bff;
+    color: #bfbfbf;
   }
 
   button {

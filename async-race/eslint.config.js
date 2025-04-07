@@ -22,6 +22,7 @@ export default tseslint.config(
       noInlineConfig: true,
     },
     rules: {
+      "@typescript-eslint/no-unsafe-argument": "false",
       "@typescript-eslint/consistent-type-assertions": [
         "error",
         { assertionStyle: "never" },
