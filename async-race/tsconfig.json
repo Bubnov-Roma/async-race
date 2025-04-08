@@ -7,7 +7,6 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "useUnknownInCatchVariables": false, // delete
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
@@ -25,7 +24,7 @@
     "alwaysStrict": true,
     "strictBuiltinIteratorReturn": true,
     "noImplicitThis": true,
-    // "useUnknownInCatchVariables": true,  // uncomment
+    "useUnknownInCatchVariables": true,
 
     /* Linting */
     "strict": true,

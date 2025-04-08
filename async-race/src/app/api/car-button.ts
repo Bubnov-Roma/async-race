@@ -1,6 +1,6 @@
 import { getCarsApi, totlaNumberCars } from "./gsrage/get-cars";
-import { createCarElemnt } from "../wiev/car/car-element";
-import { containerCar, numberAllCars } from "../wiev/header/header";
+import { createCarElemnt } from "../view/car/car-element";
+import { containerCar, numberAllCars } from "../app";
 import { postCarInApi } from "./gsrage/add-car";
 import { deleteCarApi } from "./gsrage/delete-car";
 import { setApiCar } from "./gsrage/set-car";
@@ -53,11 +53,11 @@ export const updateSelectCar = async (
 const track = (): number =>
   document.body.clientWidth - (document.body.clientWidth / 100) * 20;
 
-export const startCar = async (id: number): Promise<void> => {
+export const startCar = async (id: number, flag: boolean): Promise<void> => {
   await startApiCar(id).then(({ velocity, distance }) => {
     const time = distance / velocity;
     const car = document.querySelector(`[data-car="${id}"]`);
-    if (car instanceof HTMLElement) animation(car, track(), time);
+    if (car instanceof HTMLElement) animation(car, track(), time, flag);
     void driveApiMotor(id).then((result) => {
       // @ts-ignore
       if (!result.success) {

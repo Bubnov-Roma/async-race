@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -75,7 +75,24 @@ h1 {
 button {
   cursor: pointer;
 
-  padding: 0.6em 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 8vw;
+  height: 3vh;
+  margin-right: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+
+  font-size: 1.2vw;
+  font-weight: 500;
+
+  background-color: #1a1a1a;
+
+  transition: border-color 0.25s;
+
+  /* padding: 0.6em 1.2em;
   border: 1px solid transparent;
   border-radius: 8px;
 
@@ -85,7 +102,7 @@ button {
 
   background-color: #1a1a1a;
 
-  transition: border-color 0.25s;
+  transition: border-color 0.25s; */
 }
 
 button:hover {

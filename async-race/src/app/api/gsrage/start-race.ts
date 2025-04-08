@@ -5,7 +5,7 @@ export const raceStart = async (page: number): Promise<void> => {
   await getCarsApi(page).then((array) => {
     // @ts-ignore
     for (const car of array) {
-      void startCar(car.id);
+      void startCar(car.id, true);
     }
   });
 };

@@ -1,9 +1,13 @@
+import { getWinner } from "../../race/get-winner";
+
 export let animationId = 0;
+export let hasWinner: HTMLElement[] = new Array();
 
 export const animation = (
   car: HTMLElement,
   distance: number,
-  duration: number
+  duration: number,
+  isRace: boolean
 ): number => {
   let start = performance.now();
 
@@ -19,13 +23,14 @@ export const animation = (
 
     if (progress < 1) {
       animationId = globalThis.requestAnimationFrame(step);
-      // console.log(animationId, "from STEP function");
-      // idAnime = globalThis.requestAnimationFrame(step);
     }
-    // if (progress >= 1 && !btnResetRace.hasAttribute("disabled")) {
-    // if (resultRace.length === 0) addWinner(car, duration);
-    // resultRace.push(car);
-    // }
+    if (progress >= 1 && isRace && hasWinner.length === 0) {
+      getWinner(car, duration);
+      hasWinner.push(car);
+      isRace = false;
+      // if (resultRace.length === 0) addWinner(car, duration);
+      // resultRace.push(car);
+    }
   }
   animationId = globalThis.requestAnimationFrame(step);
 

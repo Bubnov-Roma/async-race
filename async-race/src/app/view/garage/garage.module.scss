@@ -1,0 +1,113 @@
+.garage {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form {
+  display: grid;
+  grid-template:
+        "input-name    input-name sound-label input-color button-create" 1fr
+        "input-new-car input-new-car pick-button input-color button-update" 1fr / 1fr 1fr
+        "race-button reset-button pick-button generate-button" 1fr / 1fr 1fr;
+}
+
+.button {
+  width: 8vw;
+  height: 3vh;
+  margin-right: 0.5rem;
+  font-size: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 2px;
+
+  font-weight: 500;
+
+  background-color: #1a1a1a;
+
+  transition: border-color 0.25s;
+}
+
+.button:hover {
+  border-color: #bfbfbf;
+}
+
+.button:focus,
+.button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.winner {    
+  text-align: center;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  width: 100%;
+  height: auto;
+  color: #fa0303;
+  font-size: 5vw;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-emphasis-style: double-circle open;
+  text-shadow: 0 0 1.25em #0f0;
+}
+
+.button {
+  width: 8vw;
+  height: 3vh;
+  margin-right: 0.5rem;
+  font-size: 1.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 2px;
+
+  font-weight: 500;
+
+  background-color: #1a1a1a;
+
+  transition: border-color 0.25s;
+}
+
+
+.button:hover {
+  border-color: #bfbfbf;
+}
+
+.button:focus,
+.button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.footer {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.create_block,
+.update_block,
+.controls_block,
+.pagination_block {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 0.2rem
+}

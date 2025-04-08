@@ -1,4 +1,4 @@
-import { carView } from "./car-view";
+import { carView } from "./car-svg";
 import style from "./car.module.scss";
 export const createCarElemnt = (
   id: number,
@@ -15,7 +15,7 @@ export const createCarElemnt = (
       <button class="${style.start}" id="start-${id}" data-start=${id} >Start</button>
       <button class="${style.stop}" id="stop-${id}" data-stop=${id} disabled="true">Stop</button>
       <div class="${style.img}" id="car-${id}" data-car=${id}>${carView(color)}</div>
-      <div class="flag"></div>
+      <div class="${style.finish}"></div>
     </div>
   </div>
 `;
