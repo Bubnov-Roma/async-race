@@ -1,4 +1,4 @@
-export const baseUrl = "http://127.0.0.1:3000";
+import { garageUrl } from "../host";
 
 export let totlaNumberCars = 0;
 
@@ -6,7 +6,7 @@ export const getCarsApi = async (page: number): Promise<unknown> => {
   const PAGINATION_LIMIT = 7;
   try {
     const response = await fetch(
-      `${baseUrl}/garage?_page=${page}&_limit=${PAGINATION_LIMIT}`,
+      `${garageUrl}?_page=${page}&_limit=${PAGINATION_LIMIT}`,
       {
         method: "GET",
       }

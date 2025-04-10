@@ -1,7 +1,7 @@
-export const baseUrl = "http://127.0.0.1:3000";
+import { garageUrl } from "../host";
 
 export const postCarInApi = async (settings: object): Promise<void> => {
-  await fetch(`${baseUrl}/garage`, {
+  await fetch(`${garageUrl}`, {
     method: "POST",
     body: JSON.stringify(settings),
     headers: {

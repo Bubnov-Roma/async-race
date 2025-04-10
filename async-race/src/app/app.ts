@@ -10,17 +10,25 @@ import {
   updateSelectCar,
 } from "./api/car-button";
 import { getApiCar } from "./api/gsrage/get-car";
-import { totlaNumberCars } from "./api/gsrage/get-cars";
+import { getCarsApi, totlaNumberCars } from "./api/gsrage/get-cars";
 import { raceStop } from "./api/gsrage/reset-race";
 import { raceStart } from "./api/gsrage/start-race";
 import { random } from "./utils/random";
 import { hasWinner } from "./api/gsrage/animations";
+import { getPageAPIWInners } from "./api/winners/get-page";
+import { createWinnerElement } from "./view/winners/winner-element";
+import { createCarElemnt } from "./view/car/car-element";
+import { carView } from "./view/car/car-svg";
 
 export const enum PageIds {
   garage = "garage",
   winners = "winners",
   error = "error",
 }
+
+let selectCar = 0;
+let pageNumber = 1;
+let numberPageWinners = 1;
 
 class App {
   private static readonly root: HTMLElement = document.body;
@@ -31,12 +39,14 @@ class App {
     let page: HTMLElement | null = null;
 
     switch (id) {
-      case PageIds.garage:
+      case PageIds.garage: {
         page = garagePage.element;
         break;
-      case PageIds.winners:
+      }
+      case PageIds.winners: {
         page = winnersPage.element;
         break;
+      }
       default:
         // page = errorPage;
         break;
@@ -44,6 +54,14 @@ class App {
 
     if (page) {
       App.root.append(page);
+      if (page.classList.contains("winners")) {
+        // console.log("winners");
+        updateWinners();
+      }
+      if (page.classList.contains("garage")) {
+        // console.log("garage");
+        updateGarage();
+      }
     }
   }
 
@@ -55,13 +73,13 @@ class App {
 
   private static enableRouteChange(): void {
     App.renderNewPage(App.getHash());
-    window.addEventListener("hashchange", App.enableRouteChange);
+    globalThis.addEventListener("hashchange", App.enableRouteChange);
   }
 
   private static getHash(): string {
-    return window.location.hash === ""
+    return globalThis.location.hash === ""
       ? "garage"
-      : window.location.hash.slice(1);
+      : globalThis.location.hash.slice(1);
   }
 
   public start(): void {
@@ -72,7 +90,9 @@ class App {
 export const app = new App();
 app.start();
 
-export const containerCar = document.querySelector(".container-car");
+// export const containerCar = document.querySelector(".container-car");
+// export const winnersBlock: HTMLElement | null =
+//   document.querySelector(".container-win");
 
 export const addCarButton = document.querySelector(".generate-cars");
 export const numberAllCars: HTMLElement | null =
@@ -95,8 +115,8 @@ const currentPageNumber = document.querySelector(".count-page");
 const startRaceButton = document.querySelector(".btn-race");
 const resetRaceButton = document.querySelector(".btn-reset");
 
-let selectCar = 0;
-let pageNumber = 1;
+// const winnersCount: HTMLElement | null =
+//   document.querySelector(".count-winners");
 
 function handleEvent(event: Event): void {
   const element = event.target;
@@ -130,6 +150,7 @@ function handleEvent(event: Event): void {
       const color = inputColorUpdate?.value;
       void updateSelectCar(selectCar, { name, color });
     }
+
     if (classElement.match(".btn-generate_cars")) {
       for (let index = 0; index < 100; index += 1) {
         const name = random.generateFunction("model");
@@ -151,20 +172,13 @@ function handleEvent(event: Event): void {
           nextButton?.setAttribute("disabled", "disabled");
           previousButton?.removeAttribute("disabled");
         }
-        // if (pageNumber > 1 && pageNumber <) {
-        //   nextButton?.setAttribute("disabled", "disabled");
-        // }
       } else {
-        // previousButton?.removeAttribute("disabled");
-        // console.log("else next");
-        // nextButton?.removeAttribute("disabled");
         return;
       }
     }
 
     if (classElement.match("btn-prev")) {
       if (pageNumber > 1) {
-        console.log(pageNumber > 1, " prev 1");
         if (currentPageNumber !== null) {
           currentPageNumber.innerHTML = `${(pageNumber -= 1)}`;
 
@@ -173,7 +187,6 @@ function handleEvent(event: Event): void {
           void updateGarage(pageNumber);
         }
         if (pageNumber === 1) {
-          console.log(pageNumber === 1, "prev 2");
           previousButton?.setAttribute("disabled", "disabled");
           nextButton?.removeAttribute("disabled");
         }
@@ -223,9 +236,82 @@ function handleEvent(event: Event): void {
       const notice: HTMLElement | null = document.querySelector("#winner");
       if (notice) notice.innerHTML = "";
     }
+
+    if (classElement.match("winners_btn")) {
+      globalThis.addEventListener("load", () => {
+        updateWinners();
+        // console.log("hi from winners");c
+        // console.log(winnersBlock);
+      });
+    }
   }
 }
 
 document?.addEventListener("click", handleEvent);
 
-updateGarage();
+export function updateWinners() {
+  // const winnersBlock: HTMLElement | null =
+  //   document.querySelector(".container-win");
+  // let scoreNumber = numberPageWinners * 10 - 10;
+  let winner = "";
+
+  // getPageAPIWInners(numberPageWinners).then((array) => {
+  //   if (winnersBlock) winnersBlock.innerHTML = "";
+  //   for (const item of array) {
+  //     getApiCar(item.id).then((car) => {
+  //       // console.log(car);
+  //       scoreNumber += 1;
+  //       winner = `${createWinnerElement(scoreNumber, car.color, car.name, car.wins, car.time)}`;
+  //       if (winnersBlock) winnersBlock.innerHTML += winner;
+  //       // console.log(winnersBlock);
+  //     });
+  //   }
+  //   // if (winnersCount) winnersCount.innerHTML =
+  // });
+  // console.log(winner);
+  return winner;
+}
+
+// updateGarage();
+// updateWinners();
+
+export const changePage = () => {
+  if (globalThis.location.hash === "#garage") {
+    const containerCar = document.querySelector(".container-car");
+    getCarsApi(pageNumber).then((array) => {
+      // console.log(containerCar);
+      if (containerCar) containerCar.innerHTML = "";
+      // @ts-ignore
+      for (const element of array) {
+        const newCar = `${createCarElemnt(element.id, element.name, element.color)}`;
+        if (containerCar) containerCar.innerHTML += newCar;
+      }
+      if (numberAllCars !== null) {
+        numberAllCars.textContent = `total cars - ${totlaNumberCars}`;
+      }
+    });
+    // updateGarage();
+  }
+  if (globalThis.location.hash === "#winners") {
+    const winnersBlock: HTMLElement | null =
+      document.querySelector(".container-win");
+    let scoreNumber = numberPageWinners * 10 - 10;
+    getPageAPIWInners(numberPageWinners).then((array) => {
+      if (winnersBlock) winnersBlock.innerHTML = "";
+      for (const item of array) {
+        getApiCar(item.id).then((car) => {
+          // @ts-ignore
+          const carImg = carView(car.color);
+          scoreNumber += 1;
+          // @ts-ignore
+          const winner = `${createWinnerElement(scoreNumber, carImg, car.name, item.wins, item.time)}`;
+          if (winnersBlock) winnersBlock.innerHTML += winner;
+        });
+      }
+    });
+  }
+};
+
+changePage();
+
+globalThis.addEventListener("hashchange", changePage);

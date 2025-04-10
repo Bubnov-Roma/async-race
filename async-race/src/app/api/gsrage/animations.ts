@@ -1,4 +1,4 @@
-import { getWinner } from "../../race/get-winner";
+import { addWinner } from "../../race/get-winner";
 
 export let animationId = 0;
 export let hasWinner: HTMLElement[] = new Array();
@@ -25,7 +25,7 @@ export const animation = (
       animationId = globalThis.requestAnimationFrame(step);
     }
     if (progress >= 1 && isRace && hasWinner.length === 0) {
-      getWinner(car, duration);
+      addWinner(car, duration);
       hasWinner.push(car);
       isRace = false;
       // if (resultRace.length === 0) addWinner(car, duration);

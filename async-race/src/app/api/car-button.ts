@@ -1,6 +1,6 @@
-import { getCarsApi, totlaNumberCars } from "./gsrage/get-cars";
-import { createCarElemnt } from "../view/car/car-element";
-import { containerCar, numberAllCars } from "../app";
+// import { getCarsApi, totlaNumberCars } from "./gsrage/get-cars";
+// import { createCarElemnt } from "../view/car/car-element";
+// import { containerCar, numberAllCars } from "../app";
 import { postCarInApi } from "./gsrage/add-car";
 import { deleteCarApi } from "./gsrage/delete-car";
 import { setApiCar } from "./gsrage/set-car";
@@ -10,17 +10,19 @@ import { stopApiCar } from "./gsrage/stop-car";
 import { driveApiMotor } from "./gsrage/get-motor";
 
 export const updateGarage = async (pageNumber: number = 1): Promise<void> => {
-  await getCarsApi(pageNumber).then((array) => {
-    if (containerCar) containerCar.innerHTML = "";
-    // @ts-ignore
-    for (const element of array) {
-      const newCar = `${createCarElemnt(element.id, element.name, element.color)}`;
-      if (containerCar) containerCar.innerHTML += newCar;
-    }
-    if (numberAllCars !== null) {
-      numberAllCars.textContent = `total cars - ${totlaNumberCars}`;
-    }
-  });
+  console.log(pageNumber);
+  // await getCarsApi(pageNumber).then((array) => {
+  //   console.log(containerCar);
+  //   if (containerCar) containerCar.innerHTML = "";
+  //   // @ts-ignore
+  //   for (const element of array) {
+  //     const newCar = `${createCarElemnt(element.id, element.name, element.color)}`;
+  //     if (containerCar) containerCar.innerHTML += newCar;
+  //   }
+  //   if (numberAllCars !== null) {
+  //     numberAllCars.textContent = `total cars - ${totlaNumberCars}`;
+  //   }
+  // });
 };
 
 export const createNewCar = async (
